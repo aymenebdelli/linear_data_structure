@@ -1,0 +1,39 @@
+ALGORITHM sumDistinct_1
+VAR
+     tab1 : ARRAY_OF INTEGER[p];
+     tab2 : ARRAY_OF INTEGER[q];
+     sum,i,j,p,q: INTEGER;
+     sum := 0;
+
+BEGIN
+// declaration array one and two
+    FOR i FROM 0 TO p-1 STEP step 1  DO
+        write ("elements of tab1");
+    read (tab1[i]);
+    END_FOR
+    FOR i FROM 0 TO q-1 STEP step 1 DO
+            write ("elements of tab2");
+    read (tab2[i]);
+    END_FOR
+// search distinct elements calculate sum
+    FOR i FROM 0 TO tab1.length-1 STEP step 1  DO
+         j:=0
+    WHILE (tab1[i]<>tab2[j] AND j<tab2.length) DO
+        j:=j+1;
+    END_WHILE
+        IF (tab1[i]<>tab2[j]) THEN
+            sum:=sum+tab1[i];
+        END_IF 
+    END_FOR
+// array tab2 same process
+FOR i FROM 0 TO tab2.length-1 STEP step  DO
+    j:=0
+    WHILE (tab2[i]<>tab1[j] AND j<tab1.length) DO
+        j:=j+1;
+    END_WHILE
+        IF (tab2[i]<>tab1[j]) THEN
+            sum:=sum+tab2[i];
+        END_IF 
+    END_FOR
+write(`the sumDistinct_1 is`, sum);
+END

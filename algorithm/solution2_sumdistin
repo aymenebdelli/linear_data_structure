@@ -1,0 +1,55 @@
+ALGORITHM Problem1
+VAR
+    sum,count,i,j,m,n,o : INTEGER;   // i indexing set1 ,  j searching index//
+    set1:ARRAY_OF INTEGER[m]; //declaring array with type and length which is necessary and can't be avoided//
+    set2:ARRAY_OF INTEGER[n]; //declaring array with type and length//
+    htab:HASH_TABLE<integer,integer>;
+    set3:ARRAY_OF INTEGER[o];
+    sum :=0; 
+BEGIN
+    htab:HASH_TABLE<integer,integer>;
+
+    // declaring elements of the arrays//
+    FOR i FROM 0 TO m-1 STEP step 1 DO // m is the length of the array , so m-1 is length-1//
+    write ("type the elements of the array set1");
+    read (set1[i]);
+    End for 
+
+    FOR i FROM 0 TO n-1 STEP step 1 DO  // n is the length of the array , so n-1 is length-1//
+    write ("type the elements of the array set2");
+    read (set2[i]);
+    END_FOR
+
+    //Adding elements of set1 to the hash table as keys with values 1 //
+    //with restrictions about dictionnaries a key can only appear once in the dictionnary//
+    //and each key can only have one value//
+
+    FOR i FROM 0 TO set1.length-1 STEP 1  DO
+    htab.insert(set1[i],1);
+    END_FOR
+
+    //Add elements of set2 to the hash table as keys //
+
+    FOR i FROM 0 TO set2.length-1 STEP step  DO
+    IF (htab.lookup(set2[i])=false) THEN
+    htab.insert(set2[i],1);
+    Else
+    count:=htab.get(set2[i]);
+    htab.insert(set2[i],count+1);
+    END_IF
+    END_FOR
+
+    //Put all elements in set3 array//
+    set3 :=htab.getkeys();
+
+    //sum of all distincts elements//
+
+    FOR i FROM 0 TO set3.length-1 STEP 1  DO
+    IF (htab.get(set3[i])=1) THEN
+    sum=sum+set3[i];
+    END_IF
+    END_FOR
+
+    Write('the sum of  all distinct elements is',sum);
+    
+END
